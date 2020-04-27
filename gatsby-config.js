@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `React Theming`,
+    title: `Theming`,
     description: `Learning to do CSS right in React in 2020.`,
     author: `@wlto`,
   },
