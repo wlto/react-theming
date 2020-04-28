@@ -6,10 +6,11 @@ import { lightTheme, darkTheme } from "./constants"
 
 const ThemeProvider = (props) => {
   const savedThemeIsDark = localStorage.getItem(`react-theming-is-dark`) === `true`
+  const preferedThemeIsDark = window.matchMedia(`(prefers-color-scheme: dark)`).matches
 
   const initialTheme = {
-    dark: savedThemeIsDark || false,
-    colourTheme: savedThemeIsDark ? darkTheme : lightTheme,
+    dark: savedThemeIsDark || preferedThemeIsDark || false,
+    colourTheme: (savedThemeIsDark || preferedThemeIsDark) ? darkTheme : lightTheme,
   }
 
   const [theme, dispatchTheme] = useReducer(ThemeReducer, initialTheme)
