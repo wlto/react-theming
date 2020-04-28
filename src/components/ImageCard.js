@@ -19,6 +19,8 @@ const ImageWrapper = styled.div`
 
   img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `
 
@@ -42,7 +44,7 @@ const ImageCard = (props) => {
   const { theme } = useContext(ThemeContext)
 
   return (
-    <div className="ImageCard">
+    <>
       <ImageCardWrapper theme={theme} >
         <ImageWrapper>
           <img src={img.src} alt={`${img.description}`} />
@@ -53,7 +55,7 @@ const ImageCard = (props) => {
           <time>{img.date}</time>
         </ImageCaption>
       </ImageCardWrapper>
-    </div>
+    </>
   )
 }
 

@@ -12,8 +12,19 @@ const StyledMain = styled.main`
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr auto;
-  gap: 3rem 0;
+  gap: 2.4rem 0;
   padding-top: 2.4rem;
+  padding-bottom: 2.4rem;
+
+  @media only screen and (min-width: 550px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  @media only screen and (min-width: 960px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+  }
 `
 
 const IndexPage = () => {

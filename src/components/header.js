@@ -13,7 +13,7 @@ const StyledHeader = styled.header`
 
 const StyledHeading1 = styled.h1`
   font-size: 2.57rem;
-  color: ${props => props.theme.colourTheme.accent}
+  color: ${props => props.theme.colourTheme.accent};
 `
 
 const Header = (props) => {

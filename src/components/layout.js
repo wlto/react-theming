@@ -21,7 +21,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    min-height: 100vh;
     font-family: 'Roboto', Helvetica, 'Segoe UI', Arial, sans-serif;
     background-color: ${props => props.theme.colourTheme.primary};
     transition: all 300ms ease-in-out;
@@ -30,12 +29,37 @@ const GlobalStyle = createGlobalStyle`
   :root {
     font-size: 14px;
   }
+
+  @media only screen and (min-width: 960px) {
+    :root {
+      font-size: 16px;
+    }
+  }
+
+  @media only screen and (min-width: 1028px) {
+    :root {
+      font-size: 18px;
+    }
+  }
 `
 
 const StyledLayout = styled.div`
   padding-top: 4.285rem;
   padding-left: 2.285rem;
   padding-right: 2.285rem;
+
+  @media only screen and (min-width: 720px) {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  @media only screen and (min-width: 960px) {
+    max-width: 960px;
+  }
+
+  @media only screen and (min-width: 1028px) {
+    max-width: 1028px;
+  }
 `
 
 const Layout = ({ children }) => {
