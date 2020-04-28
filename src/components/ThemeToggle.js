@@ -1,5 +1,7 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import styled from "styled-components"
+
+import ThemeContext from "../contexts/themes/ThemeContext"
 
 const ToggleWrapper = styled.div`
   position: relative;
@@ -7,7 +9,7 @@ const ToggleWrapper = styled.div`
   height: calc(1.4rem + 0.14rem + 0.14rem);
   padding: 0.14rem;
   border-radius: 1.4rem;
-  background-color: ${props => props.theme == "light" ? "#000" : "#fff"};
+  background-color: ${props => props.theme.colourTheme.accent};
   cursor: pointer;
   transition: all 350ms ease-in-out;
 `
@@ -15,12 +17,12 @@ const ToggleWrapper = styled.div`
 const ToggleThumb = styled.div`
   position: absolute;
   top: 0.14rem;
-  left: ${props => props.theme == "light" ? "0.14rem" : "calc(100% - 1.4rem - 0.14rem)"};
+  left: ${props => !props.theme.dark ? "0.14rem" : "calc(100% - 1.4rem - 0.14rem)"};
   display: inline-block;
   width: 1.4rem;
   height: 1.4rem;
   border-radius: 50%;
-  background-color: ${props => props.theme == "light" ? "#fff" : "#000"};
+  background-color: ${props => props.theme.colourTheme.primary};
   transition: all 350ms ease-in-out;
 `
 
@@ -40,14 +42,10 @@ const ToggleEmoji = styled.span`
 `
 
 const ThemeToggle = (props) => {
-  const [ theme, setTheme ]= useState(`light`);
+  const { theme, dispatchTheme } = useContext(ThemeContext)
 
   const toggleTheme = () => {
-    if (theme == `light`) {
-      setTheme(`dark`);
-    } else {
-      setTheme(`light`);
-    }
+    dispatchTheme({type: `TOGGLE_THEME`});
   }
   
   return (

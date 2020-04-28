@@ -1,12 +1,13 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
+
+import ThemeContext from "../contexts/themes/ThemeContext"
 
 const ImageCardWrapper = styled.div`
   width: 100%;
   padding: 1rem;
   border-radius: 5px;
-  background-color: #000;
-  color: #fff;
+  background-color: ${props => props.theme.colourTheme.accent};
   overflow: hidden;
 `
 
@@ -14,7 +15,6 @@ const ImageWrapper = styled.div`
   width: 100%;
   height: 12.1rem;
   border-radius: 5px;
-  background-color: skyblue;
   overflow: hidden;
 
   img {
@@ -27,7 +27,7 @@ const ImageCaption = styled.p`
   padding-top: 0.7rem;
   font-size: 1.1rem;
   font-weight: 600;
-  background-color: rgba(0, 0, 0, 0.7);
+  color: ${props => props.theme.colourTheme.primary};
 
   time {
     display: inline-block;
@@ -38,15 +38,16 @@ const ImageCaption = styled.p`
 `
 
 const ImageCard = (props) => {
-  const { img } = props;
+  const { img } = props
+  const { theme } = useContext(ThemeContext)
 
   return (
     <div className="ImageCard">
-      <ImageCardWrapper>
+      <ImageCardWrapper theme={theme} >
         <ImageWrapper>
           <img src={img.src} />
         </ImageWrapper>
-        <ImageCaption>
+        <ImageCaption theme={theme} >
           {img.description}
           <br />
           <time>{img.date}</time>
