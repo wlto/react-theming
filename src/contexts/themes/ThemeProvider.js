@@ -5,10 +5,13 @@ import ThemeReducer from "./ThemeReducer"
 import { lightTheme, darkTheme } from "./constants"
 
 const ThemeProvider = (props) => {
+  let savedThemeIsDark = false
+  let preferedThemeIsDark = false
   // For SSR
-  const globalWindow = typeof window !== `undefined` && window
-  const savedThemeIsDark = globalWindow.localStorage.getItem(`react-theming-is-dark`) === `true`
-  const preferedThemeIsDark = globalWindow.matchMedia(`(prefers-color-scheme: dark)`).matches
+  if (typeof window !== `undefined`) {
+    savedThemeIsDark = localStorage.getItem(`react-theming-is-dark`) === `true`
+    preferedThemeIsDark = matchMedia(`(prefers-color-scheme: dark)`).matches
+  }
 
   const initialTheme = {
     dark: savedThemeIsDark || preferedThemeIsDark || false,
