@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 
 import ThemeContext from "../contexts/themes/ThemeContext"
@@ -34,7 +34,7 @@ const ToggleEmojiWrapper = styled.div`
   padding-right: 0.14rem;
 `
 
-const ToggleEmoji = styled.span`
+const ToggleEmoji = styled.div`
   display: inline-block;
   padding-top: 0.04rem;
   font-size: 1rem;
@@ -53,8 +53,8 @@ const ThemeToggle = (props) => {
       <ToggleWrapper onClick={toggleTheme} theme={theme} >
         <ToggleThumb theme={theme} />
         <ToggleEmojiWrapper>
-          <ToggleEmoji role="img" aria-label="dark">🌙</ToggleEmoji>
-          <ToggleEmoji role="img" aria-label="light">☀️</ToggleEmoji>
+          <ToggleEmoji><span role="img" aria-label="moon">🌙</span></ToggleEmoji>
+          <ToggleEmoji><span role="img" aria-label="sun">☀️</span></ToggleEmoji>
         </ToggleEmojiWrapper>
       </ToggleWrapper>
     </>

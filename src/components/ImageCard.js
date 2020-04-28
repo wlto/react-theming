@@ -45,7 +45,7 @@ const ImageCard = (props) => {
     <div className="ImageCard">
       <ImageCardWrapper theme={theme} >
         <ImageWrapper>
-          <img src={img.src} />
+          <img src={img.src} alt={`${img.description}`} />
         </ImageWrapper>
         <ImageCaption theme={theme} >
           {img.description}

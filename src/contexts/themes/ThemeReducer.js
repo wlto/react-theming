@@ -6,9 +6,9 @@ const ThemeReducer = (state, action) => {
       const updatedDarkStatus = !state.dark
 
       if (updatedDarkStatus) {
-        localStorage.setItem(`react-theming-is-dark`, `false`)
-      } else {
         localStorage.setItem(`react-theming-is-dark`, `true`)
+      } else {
+        localStorage.setItem(`react-theming-is-dark`, `false`)
       }
 
       return {
