@@ -6,7 +6,7 @@ import { lightTheme, darkTheme } from "./constants"
 
 const ThemeProvider = (props) => {
   // For SSR
-  const globalWindow = typeof window !== undefined && window
+  const globalWindow = typeof window !== `undefined` && window
   const savedThemeIsDark = globalWindow.localStorage.getItem(`react-theming-is-dark`) === `true`
   const preferedThemeIsDark = globalWindow.matchMedia(`(prefers-color-scheme: dark)`).matches
 
