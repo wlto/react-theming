@@ -1,12 +1,14 @@
-import React, {useReducer} from "react"
+import React, { useReducer } from "react"
 
 import ThemeContext from "./ThemeContext"
 import ThemeReducer from "./ThemeReducer"
 import { lightTheme, darkTheme } from "./constants"
 
 const ThemeProvider = (props) => {
-  const savedThemeIsDark = localStorage.getItem(`react-theming-is-dark`) === `true`
-  const preferedThemeIsDark = window.matchMedia(`(prefers-color-scheme: dark)`).matches
+  // For SSR
+  const globalWindow = typeof window !== undefined && window
+  const savedThemeIsDark = globalWindow.localStorage.getItem(`react-theming-is-dark`) === `true`
+  const preferedThemeIsDark = globalWindow.matchMedia(`(prefers-color-scheme: dark)`).matches
 
   const initialTheme = {
     dark: savedThemeIsDark || preferedThemeIsDark || false,
@@ -16,7 +18,7 @@ const ThemeProvider = (props) => {
   const [theme, dispatchTheme] = useReducer(ThemeReducer, initialTheme)
 
   return (
-    <ThemeContext.Provider value={{theme, dispatchTheme}}>
+    <ThemeContext.Provider value={{ theme, dispatchTheme }}>
       {props.children}
     </ThemeContext.Provider>
   )
