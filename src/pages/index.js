@@ -1,8 +1,11 @@
 import React from "react"
-import { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
+import ImageCard from "../components/ImageCard"
+
+import images from "../images"
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -14,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', Helvetica, 'Segoe UI', Arial, sans-serif;
   }
 
   :root {
@@ -22,10 +25,24 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const StyledMain = styled.main`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 3rem 0;
+  padding-top: 2.4rem;
+`
+
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <h1>Hi people</h1>
+    <StyledMain>
+      {
+        images.map((img, index) => (
+          <ImageCard img={img} key={`image-${index}`} />
+        ))
+      }
+    </StyledMain>
     <GlobalStyle />
   </Layout>
 )
