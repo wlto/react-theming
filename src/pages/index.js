@@ -6,7 +6,7 @@ import SEO from "../components/SEO"
 import ImageCard from "../components/ImageCard"
 import ThemeProvider from "../contexts/themes/ThemeProvider"
 
-import images from "../images"
+// import images from "../images"
 
 const StyledMain = styled.main`
   display: grid;
@@ -32,13 +32,13 @@ const IndexPage = () => {
     <ThemeProvider>
       <Layout>
         <SEO title="Home" />
-        <StyledMain>
+        {/* <StyledMain>
           {
             images.map((img, index) => (
               <ImageCard img={img} key={`image-${index}`} />
             ))
           }
-        </StyledMain>
+        </StyledMain> */}
       </Layout>
     </ThemeProvider>
   )
