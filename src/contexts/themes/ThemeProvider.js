@@ -1,27 +1,38 @@
-import React, { useReducer } from "react"
+import React, { useState, useEffect } from "react"
 
 import ThemeContext from "./ThemeContext"
-import ThemeReducer from "./ThemeReducer"
 import { lightTheme, darkTheme } from "./constants"
 
 const ThemeProvider = (props) => {
-  let savedThemeIsDark = false
-  let preferedThemeIsDark = false
-  // For SSR
-  if (typeof window !== `undefined`) {
-    savedThemeIsDark = localStorage.getItem(`react-theming-is-dark`) === `true`
-    preferedThemeIsDark = matchMedia(`(prefers-color-scheme: dark)`).matches
-  }
+  const [theme, setTheme] = useState({
+    dark: false,
+    colourTheme: { ...lightTheme }
+  })
 
-  const initialTheme = {
-    dark: savedThemeIsDark || preferedThemeIsDark || false,
-    colourTheme: (savedThemeIsDark || preferedThemeIsDark) ? darkTheme : lightTheme,
-  }
+  useEffect(() => {
+    const savedThemeIsDark = JSON.parse(localStorage.getItem(`react-theming-is-dark`)) || matchMedia(`(prefers-color-scheme: dark)`).matches
+    if (savedThemeIsDark) {
+      setTheme({
+        dark: true,
+        colourTheme: { ...darkTheme }
+      })
+    }
+  }, []);
 
-  const [theme, dispatchTheme] = useReducer(ThemeReducer, initialTheme)
+  useEffect(() => {
+    localStorage.setItem(`react-theming-is-dark`, JSON.stringify(theme.dark))
+  }, [theme]);
+
+  const toggleTheme = () => {
+    const updatedDarkStatus = !theme.dark
+    setTheme({
+      dark: updatedDarkStatus,
+      colourTheme: updatedDarkStatus ? { ...darkTheme } : { ...lightTheme }
+    })
+  }
 
   return (
-    <ThemeContext.Provider value={{ theme, dispatchTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {props.children}
     </ThemeContext.Provider>
   )

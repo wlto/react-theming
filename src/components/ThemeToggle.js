@@ -42,12 +42,8 @@ const ToggleEmoji = styled.div`
 `
 
 const ThemeToggle = (props) => {
-  const { theme, dispatchTheme } = useContext(ThemeContext)
+  const { theme, toggleTheme } = useContext(ThemeContext)
 
-  const toggleTheme = () => {
-    dispatchTheme({type: `TOGGLE_THEME`});
-  }
-  
   return (
     <>
       <ToggleWrapper onClick={toggleTheme} theme={theme} >
