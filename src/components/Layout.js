@@ -5,13 +5,12 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React, { useContext } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 import styled, { createGlobalStyle } from "styled-components"
 
 import Header from "./Header"
-import ThemeContext from "../contexts/themes/ThemeContext"
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -22,8 +21,28 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Roboto', Helvetica, 'Segoe UI', Arial, sans-serif;
-    background-color: ${props => props.theme.colourTheme.primary};
+    background-color: var(--colour-primary);
     transition: all 300ms ease-in-out;
+  }
+
+  body.light {
+    --colour-primary: #ffffff;
+    --colour-accent: #000000;
+    --colour-text: #ffffff;
+
+    .ToggleThumb {
+      left: 0.14rem;
+    }
+  }
+
+  body.dark {
+    --colour-primary: #000000;
+    --colour-accent: #ffffff;
+    --colour-text: #000000;
+
+    .ToggleThumb {
+      left: calc(100% - 1.4rem - 0.14rem);
+    }
   }
 
   :root {
@@ -73,15 +92,13 @@ const Layout = ({ children }) => {
     }
   `)
 
-  const { theme } = useContext(ThemeContext)
-
   return (
     <StyledLayout>
       <Header siteTitle={data.site.siteMetadata.title} />
       <div>
         <main>{children}</main>
       </div>
-      <GlobalStyle theme={theme} />
+      <GlobalStyle />
     </StyledLayout>
   )
 }

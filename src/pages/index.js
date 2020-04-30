@@ -4,7 +4,6 @@ import styled from "styled-components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import ImageCard from "../components/ImageCard"
-import ThemeProvider from "../contexts/themes/ThemeProvider"
 
 import images from "../images"
 
@@ -29,18 +28,16 @@ const StyledMain = styled.main`
 
 const IndexPage = () => {
   return (
-    <ThemeProvider>
-      <Layout>
-        <SEO title="Home" />
-        <StyledMain>
-          {
-            images.map((img, index) => (
-              <ImageCard img={img} key={`image-${index}`} />
-            ))
-          }
-        </StyledMain>
-      </Layout>
-    </ThemeProvider>
+    <Layout>
+      <SEO title="Home" />
+      <StyledMain>
+        {
+          images.map((img, index) => (
+            <ImageCard img={img} key={`image-${index}`} />
+          ))
+        }
+      </StyledMain>
+    </Layout>
   )
 }
 

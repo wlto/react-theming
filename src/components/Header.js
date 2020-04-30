@@ -1,9 +1,8 @@
-import React, { useContext } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 
 import ThemeToggle from "./ThemeToggle"
-import ThemeContext from "../contexts/themes/ThemeContext"
 
 const StyledHeader = styled.header`
   display: flex;
@@ -13,16 +12,15 @@ const StyledHeader = styled.header`
 
 const StyledHeading1 = styled.h1`
   font-size: 2.57rem;
-  color: ${props => props.theme.colourTheme.accent};
+  color: var(--colour-accent);
 `
 
 const Header = (props) => {
   const { siteTitle } = props
-  const { theme } = useContext(ThemeContext)
 
   return (
     <StyledHeader>
-      <StyledHeading1 theme={theme}>
+      <StyledHeading1>
         {siteTitle}
       </StyledHeading1>
       <ThemeToggle />
