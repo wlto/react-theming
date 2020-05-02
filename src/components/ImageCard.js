@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import BackgroundImage from 'gatsby-background-image'
 
 const ImageCardWrapper = styled.div`
   width: 100%;
@@ -9,17 +10,12 @@ const ImageCardWrapper = styled.div`
   overflow: hidden;
 `
 
-const ImageWrapper = styled.div`
+const ImageWrapper = styled(BackgroundImage)`
   width: 100%;
   height: 12.1rem;
   border-radius: 5px;
   overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  background-size: cover;
 `
 
 const ImageCaption = styled.p`
@@ -43,9 +39,7 @@ const ImageCard = (props) => {
   return (
     <>
       <ImageCardWrapper>
-        <ImageWrapper>
-          <img src={img.src} alt={`${img.description}`} />
-        </ImageWrapper>
+        <ImageWrapper fluid={img.src} fadeIn="soft" />
         <ImageCaption>
           {img.description}
           <br />

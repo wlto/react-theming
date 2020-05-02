@@ -1,11 +1,11 @@
 import React from "react"
 import styled from "styled-components"
+import { graphql, useStaticQuery } from "gatsby"
+import BackgroundImage from "gatsby-background-image"
 
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import ImageCard from "../components/ImageCard"
-
-import images from "../images"
 
 const StyledMain = styled.main`
   display: grid;
@@ -26,7 +26,38 @@ const StyledMain = styled.main`
   }
 `
 
+const imagesDescription = [
+  {
+    description: `feel like summer and i don't wanna miss you`,
+    date: `April 04, 2020`
+  },
+  {
+    description: `with or without i've waited my whole life`,
+    date: 'March 27, 2020'
+  },
+]
+
 const IndexPage = () => {
+  const { allImageSharp } = useStaticQuery(graphql`
+    query AllImages {
+      allImageSharp {
+        edges {
+          node {
+            fluid(quality: 80) {
+              ...GatsbyImageSharpFluid_withWebp
+            }
+          }
+        }
+      }
+    }  
+  `)
+  const images = allImageSharp.edges.map((img, index) => {
+    return {
+      ...imagesDescription[index],
+      src: img.node.fluid
+    }
+  })
+
   return (
     <Layout>
       <SEO title="Home" />
